@@ -1,6 +1,6 @@
 <div class="modal animated fade sponsor-benefit-modal" tabindex="-1" role="dialog" aria-labelledby="sponsorBenefits" aria-hidden="true">
   <div class="modal-dialog modal-lg">
-    <div class="modal-content py-2 py-md-5 px-3 px-md-5 ">
+    <div class="modal-content py-2 py-md-3 px-3 px-md-5 ">
       <section class="d-flex flex-column">
         <h4 class="my-4 text-color-red">SPONSORSHIP BENEFITS
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -10,7 +10,7 @@
         <div id="benefit-list" class="team-description-acc" data-children=".item">
           <ul>
           {% for benefit in site.data.sponsorBenefits %}
-            <li>{{ benefit.item }}</li>
+            <li><p>{{ benefit.item }}</p></li>
           {% endfor %}
         </ul>
         </div>

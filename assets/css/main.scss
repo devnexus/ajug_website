@@ -9,10 +9,11 @@
 @import 'footer';
 @import 'contactCard';
 @import "event";
+@import "sponsor";
 
 @font-face {
     font-family: DroidSerif;
-    src: url('/assets/fonts/droid-serif/DroidSerif-Regular.ttf');
+    src: url('../fonts/droid-serif/DroidSerif-Regular.ttf');
 }
 body {
   background-color: $background-blue;
@@ -60,7 +61,6 @@ body {
   width: 90px;
   padding: 1px;
 }
-
 .ajug-microphone-img{
   width: 100%;
 }

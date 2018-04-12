@@ -9,18 +9,8 @@
       border-radius: 0;
       border: 0;
       background-color: $background-blue;
-      height: 100vh;
+      min-height:100vh;
     }
   }
 }
 
-@media (max-width: 767px) {
-  .team-modal {
-    .modal-dialog {
-      margin: 10px;
-      .modal-content {
-        height: 100%;
-      }
-    }
-  }
-}

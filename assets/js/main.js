@@ -10,7 +10,7 @@
         $('.parallax-window').attr('data-image-src','/assets/img/background/background-a-2.svg');
       }
       
-      if(screen.width <= 768){
+      if(screen.width < 768){
         $('.ajug_becomemember_banner').attr('src', '/assets/img/ajug_becomemember_banner_rect.png');
       }
   

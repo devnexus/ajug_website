@@ -1,0 +1,44 @@
+.sponsor {
+  .sponsor-list {
+    margin-left: -3rem;
+    margin-right: auto;
+    .sponsor-image-wrapper{
+      background-color: white;
+      padding: 15px;
+      .sponsor-image {
+        height: 100px;
+        width: 100px;
+      }      
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .sponsor {
+    .sponsor-list {
+      margin-left: auto !important;
+      
+      .sponsor-image-wrapper {
+        .sponsor-image {
+          height: 85px !important;
+          width: 85px !important;
+        }      
+      }
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .sponsor {
+    .sponsor-list {
+      margin-left: auto !important;
+      
+      .sponsor-image-wrapper {
+        .sponsor-image {
+          height: 90px;
+          width: 90px;
+        }      
+      }
+    }
+  }
+}
