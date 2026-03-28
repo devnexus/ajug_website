@@ -15,29 +15,29 @@ collections_config:
     auto_discovered: true
     _enabled_editors:
       - data
+data_config:
   events:
     path: _data/meetups.yml
-    output: false
     _enabled_editors:
       - data
-  pages:
-    path: ''
-    output: true
-    filter: strict
-    auto_discovered: true
 collection_groups:
-  - heading: Events
-    collections:
-      - events
   - heading: Pages
     collections:
       - pages
 _enabled_editors: null
 _inputs:
   date:
-    type: datetime
+    type: date
+  time:
+    type: text
   title:
     type: text
+  link:
+    type: url
+  image:
+    type: image
+    options:
+      uploads_dir: /assets/img/meetups
   meetup_link:
     type: url
   categories:

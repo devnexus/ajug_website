@@ -1,4 +1,5 @@
-- date: 2024-05-20 18:45:00
+- date: 2024-05-20
+  time: "18:45"
   title:
-  meetup_link: https://www.meetup.com/atlantajug
-  meetup_image_path: 
+  link: https://www.meetup.com/atlantajug
+  image:
