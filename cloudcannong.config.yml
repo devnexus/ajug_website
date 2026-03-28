@@ -1,0 +1,68 @@
+source: ''
+paths:
+  static: ''
+  uploads: uploads
+  uploads_use_relative_path: false
+  dam_uploads: ''
+  dam_static: ''
+  data: _data
+  collections: ''
+  layouts: _layouts
+collections_config:
+  data:
+    path: _data
+    output: false
+    auto_discovered: true
+    _enabled_editors:
+      - data
+  pages:
+    path: ''
+    output: true
+    filter: strict
+    auto_discovered: true
+collection_groups:
+  - heading: Events
+    collections:
+      - data
+  - heading: Pages
+    collections:
+      - pages
+_enabled_editors: null
+_inputs:
+  date:
+    type: datetime
+  title:
+    type: text
+  meetup_link:
+    type: url
+  categories:
+    type: multiselect
+    options:
+      allow_create: true
+  tags:
+    type: multiselect
+    options:
+      allow_create: true
+  meetup_image_path:
+    type: image
+    options:
+      uploads_dir: /assets/img/meetups
+  sponsor_image_path:
+    type: image
+    options:
+      uploads_dir: /assets/img/sponsors
+      width: 300
+      height: 300
+      resize_style: cover
+      mime_type: image/jpeg
+      expandable: false
+_select_data:
+  sass:
+    sass_dir: _sass
+_structures: {}
+_editables: {}
+commit_templates: []
+base_url: ''
+editor: null
+source_editor: null
+timezone: Etc/UTC
