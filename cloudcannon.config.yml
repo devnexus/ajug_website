@@ -9,6 +9,13 @@ paths:
   collections: ''
   layouts: _layouts
 collections_config:
+collections_config:
+  meetups:
+    path: _data/meetups.yml
+    name: Upcoming Meetups
+    icon: event
+    # This tells CloudCannon this is a single file, not a folder
+    parser: yaml
   data:
     path: _data
     output: false
@@ -37,7 +44,10 @@ _inputs:
   image:
     type: image
     options:
-      uploads_dir: /assets/img/meetups
+      uploads_dir: /assets/img
+  meetup_image_path:
+    type: image
+    uploads_dir: /assets/img/meetups
   meetup_link:
     type: url
   categories:
@@ -64,7 +74,15 @@ _inputs:
 _select_data:
   sass:
     sass_dir: _sass
-_structures: {}
+_structures: 
+  meetup_item:
+    values:
+      - label: New Meetup
+        value:
+          date: 
+          title: 
+          meetup_link:
+          meetup_image_path:
 _editables: {}
 commit_templates: []
 base_url: ''
