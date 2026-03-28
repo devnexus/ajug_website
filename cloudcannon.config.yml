@@ -15,6 +15,11 @@ collections_config:
     auto_discovered: true
     _enabled_editors:
       - data
+  events:
+    path: _data/meetups.yml
+    output: false
+    _enabled_editors:
+      - data
   pages:
     path: ''
     output: true
@@ -23,7 +28,7 @@ collections_config:
 collection_groups:
   - heading: Events
     collections:
-      - data
+      - events
   - heading: Pages
     collections:
       - pages
