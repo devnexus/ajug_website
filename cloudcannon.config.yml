@@ -28,6 +28,8 @@ collections_config:
     # This defines the file naming convention when creating a new post
     create:
       path: "{date|year}-{date|month}-{date|day}-{title|slugify}.[ext]"
+      extra_data:
+        date: "{date|year}-{date|month}-{date|day}"
 
     # Define the actual editor fields here
     _inputs:
@@ -35,8 +37,7 @@ collections_config:
         type: text
         label: Event Title
         comment: "Required: The name of the event."
-        instance_values:
-          value: "New Event"
+        instance_value: "New Event"
       
       date:
         type: date
@@ -48,6 +49,7 @@ collections_config:
       registration:
         type: url
         placeholder: https://luma.com/ajug
+        instance_value: https://luma.com/ajug
       
       image:
         type: image
