@@ -53,7 +53,7 @@ collections_config:
         type: image
         options:
           paths:
-            uploads: /assets/images
+            uploads: /assets/img/meetups
             uploads_filename:
             uploads_use_relative_path:
             static:
@@ -74,6 +74,9 @@ collections_config:
           height: 1200
           expandable:
           allowed_sources:
+            - uploads
+            - existing
+            - url
           prevent_resize_existing_files:
           sizes:
         cascade: true
