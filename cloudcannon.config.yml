@@ -14,7 +14,7 @@ collections_config:
     name: Events
     icon: event_available
     disable_url: true
-    description: 'Upcoming group meetups and events.'
+    description: 'group meetups and events.'
     
     # How the list looks in the CloudCannon UI
     preview:
