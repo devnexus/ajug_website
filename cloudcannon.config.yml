@@ -6,7 +6,7 @@ paths:
   dam_uploads: ''
   dam_static: ''
   data: _data
-  collections: _meetups
+  collections: _posts
   layouts: _layouts
 collections_config:
 collections_config:
@@ -22,8 +22,8 @@ collections_config:
     auto_discovered: true
     _enabled_editors:
       - data
-  meetups:
-    path: _meetups
+  posts:
+    path: _posts
     output: false
     disable_add: false
     disable_file_actions: false
@@ -37,7 +37,7 @@ collection_groups:
       - pages
   - heading: Content
     collections:
-      - meetups
+      - posts
 _enabled_editors: null
 _inputs:
   date:

@@ -1,5 +1,5 @@
 <section id="events" class="d-flex flex-column justify-content-start section ml-lg-5">
-  {% assign meetup_docs = site.meetups | sort: "date" %}
+  {% assign meetup_docs = site.posts | sort: "date" %}
   {% assign upcoming_meetups = meetup_docs | where_exp: "item", "item.date >= site.time" %}
   {% assign past_meetups = meetup_docs | where_exp: "item", "item.date < site.time" | reverse %}
   <div class="row mt-3 mb-6">
