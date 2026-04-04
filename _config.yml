@@ -38,8 +38,17 @@ defaults:
       path: "assets/img/sponsors"
     values:
       sponsor: true
+  - scope:
+      path: ""
+      type: "meetups"
+    values:
+      image: ""
+      link: ""
 # Build settings
 markdown: kramdown
+collections:
+  meetups:
+    output: false
 sass:
   sass_dir: _sass
 gems:

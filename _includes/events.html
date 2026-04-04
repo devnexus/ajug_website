@@ -1,13 +1,22 @@
 <section id="events" class="d-flex flex-column justify-content-start section ml-lg-5">
+  {% assign meetup_docs = site.meetups | sort: "date" %}
+  {% assign upcoming_meetups = meetup_docs | where_exp: "item", "item.date >= site.time" %}
+  {% assign past_meetups = meetup_docs | where_exp: "item", "item.date < site.time" | reverse %}
   <div class="row mt-3 mb-6">
     <div class="col-md-12 col-lg-8">
       <div class="d-flex flex-column">
         <h1 class="title mb-4 display-4">Upcoming Events</h1>
         <div class="eventCards card shadow">
           <ul id="meetup-events" class="list-group list-group-flush">
-            {% for e in site.data.meetups %}
-	      {% include event_card.html post=e %}
-	    {% endfor %}
+            {% if upcoming_meetups.size > 0 %}
+              {% for e in upcoming_meetups %}
+                {% include event_card.html post=e %}
+              {% endfor %}
+            {% else %}
+              {% for e in site.data.meetups %}
+                {% include event_card.html post=e %}
+              {% endfor %}
+            {% endif %}
           </ul>
         </div>
       </div>
@@ -17,9 +26,15 @@
         <h1 class="title mb-4 display-4">Past Events</h1>
         <div class="eventCards card shadow">
           <ul id="meetup-events" class="list-group list-group-flush">
-            {% for e in site.data.pastmeetups %}
-	            {% include event_card.html post=e %}
-	          {% endfor %}
+            {% if past_meetups.size > 0 %}
+              {% for e in past_meetups %}
+                {% include event_card.html post=e %}
+              {% endfor %}
+            {% else %}
+              {% for e in site.data.pastmeetups %}
+                {% include event_card.html post=e %}
+              {% endfor %}
+            {% endif %}
           </ul>
         </div>
       </div>
