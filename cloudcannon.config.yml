@@ -24,12 +24,66 @@ collections_config:
       - data
   posts:
     path: _posts
-    output: false
+    name: Events
+    icon: event_available
+    disable_url: true
+    description: ''
+    preview:
+      text:
+        '-key': title
+      subtext:
+        '-key': date
+      image:
+        type: image
+        cascade: true
+        required: false
+        placeholder: marketing image link
+      pattern: (?i)\.(jpe?g|png|svg)$
+      pattern_message: Please select an image file
+      title:
+        type: text
+        cascade: true
+        required: true
+        placeholder: Event Title
+    _inputs:
+      registration:
+        type: url
+        placeholder: https://luma.com/ajug
+      image:
+        type: image
+        options:
+          paths:
+            uploads: /assets/images
+            uploads_filename:
+            uploads_use_relative_path:
+            static:
+            dam_uploads:
+            dam_uploads_filename:
+            dam_static:
+          mime_type:
+          accepts_mime_types:
+            - image/svg+xml
+            - image/png
+            - image/jpeg
+            - image/svg+xml
+            - image/png
+            - image/jpeg
+          empty_type:
+          resize_style:
+          width: 1600
+          height: 1200
+          expandable:
+          allowed_sources:
+          prevent_resize_existing_files:
+          sizes:
+        cascade: true
+    create:
+      path: >-
+        [relative_base_path]/{date|year}-{date|month}-{date|day}-{title|slugify}.[ext]
     disable_add: false
+    disable_add_folder: false
     disable_file_actions: false
-    icon: event
-    _enabled_editors:
-      - data
+
 data_config: {}
 collection_groups:
   - heading: Pages

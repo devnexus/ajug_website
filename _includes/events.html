@@ -12,7 +12,7 @@
     {% endif %}
   {% endfor %}
   {% assign past_meetups = past_meetups | reverse %}
-    <div class="row mt-3 mb-6">
+  <div class="row mt-3 mb-6">
     <div class="col-md-12 col-lg-8">
       <div class="d-flex flex-column">
         <h1 class="title mb-4 display-4">Upcoming Events</h1>
@@ -20,46 +20,35 @@
           <ul id="meetup-events" class="list-group list-group-flush">
             {% if upcoming_meetups.size > 0 %}
             {% for e in upcoming_meetups %}
-            {% include event_card.html post=e %}
+            {% assign upcoming_link = e.registration | default: e.link | default: e.meetup_link | default: e.url %}
+            {% include event_card.html post=e action_label='Register' action_link=upcoming_link %}
             {% endfor %}
             {% else %}
-            {% for e in past_meetups %}
-            {% include event_card.html post=e %}
-            {% endfor %}
+            <li class="list-group-item">No upcoming events currently scheduled.</li>
             {% endif %}
           </ul>
         </div>
       </div>
     </div>
+  </div>
+
+  {% if past_meetups.size > 0 %}
+  <div class="row mb-6">
     <div class="col-md-12 col-lg-8">
       <div class="d-flex flex-column">
         <h1 class="title mb-4 display-4">Past Events</h1>
         <div class="eventCards card shadow">
-          <ul id="meetup-events" class="list-group list-group-flush">
-            {% if past_meetups.size > 0 %}
+          <ul id="past-meetup-events" class="list-group list-group-flush">
             {% for e in past_meetups %}
-            {% include event_card.html post=e %}
+            {% assign past_link = e.url | default: e.registration | default: e.link | default: e.meetup_link %}
+            {% include event_card.html post=e action_label='Details' action_link=past_link %}
             {% endfor %}
-            {% else %}
-            {% for e in site.data.pastmeetups %}
-            {% include event_card.html post=e %}
-            {% endfor %}
-            {% endif %}
           </ul>
         </div>
       </div>
     </div>
-    </div>
-    <!--
-  <div class="row">
-    <div class="col-md-12 col-lg-8">
-      <div class="d-flex flex-column">
-        <h1 class="title display-4">Social Updates</h1>
-        <a class="h5">Follow us on Twitter at @atlantajug</a>
-      </div>
-    </div>
   </div>
--->
+  {% endif %}
 </section>
 <section id="socialnmedia" class="d-flex flex-column justify-content-start section ml-lg-5">
   <h1 class="my-3 display-4">Social and Media</h1>
