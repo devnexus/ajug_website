@@ -112,15 +112,6 @@ _inputs:
 _select_data:
   sass:
     sass_dir: _sass
-_structures: 
-  meetup_item:
-    values:
-      - label: New Meetup
-        value:
-          date: 
-          title: 
-          meetup_link:
-          meetup_image_path:
 _editables: {}
 commit_templates: []
 base_url: ''
