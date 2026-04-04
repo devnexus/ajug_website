@@ -27,7 +27,7 @@ collections_config:
 
     # This defines the file naming convention when creating a new post
     create:
-      path: "[relative_base_path]/{date|year}-{date|month}-{date|day}-{title|slugify}.[ext]"
+      path: "{date|year}-{date|month}-{date|day}-{title|slugify}.[ext]"
 
     # Define the actual editor fields here
     _inputs:
@@ -83,23 +83,6 @@ _inputs:
     type: image
     options:
       uploads_dir: /assets/img
-  meetup_image_path:
-    type: image
-    uploads_dir: /assets/img/meetups
-  meetup_link:
-    type: url
-  categories:
-    type: multiselect
-    options:
-      allow_create: true
-  tags:
-    type: multiselect
-    options:
-      allow_create: true
-  meetup_image_path:
-    type: image
-    options:
-      uploads_dir: /assets/img/meetups
   sponsor_image_path:
     type: image
     options:
