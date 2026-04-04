@@ -9,84 +9,58 @@ paths:
   collections: _posts
   layouts: _layouts
 collections_config:
-collections_config:
-  meetups:
-    path: _data/meetups.yml
-    name: Upcoming Meetups
-    icon: event
-    # This tells CloudCannon this is a single file, not a folder
-    parser: yaml
-  data:
-    path: _data
-    output: false
-    auto_discovered: true
-    _enabled_editors:
-      - data
   posts:
     path: _posts
     name: Events
     icon: event_available
     disable_url: true
-    description: ''
+    description: 'Upcoming group meetups and events.'
+    
+    # How the list looks in the CloudCannon UI
     preview:
       text:
-        '-key': title
+        - key: title
       subtext:
-        '-key': date
+        - key: date
       image:
-        type: image
-        cascade: true
-        required: false
-        placeholder: marketing image link
-      pattern: (?i)\.(jpe?g|png|svg)$
-      pattern_message: Please select an image file
+        - key: image
+
+    # This defines the file naming convention when creating a new post
+    create:
+      path: "[relative_base_path]/{date|year}-{date|month}-{date|day}-{title|slugify}.[ext]"
+
+    # Define the actual editor fields here
+    _inputs:
       title:
         type: text
-        cascade: true
-        required: true
-        placeholder: Event Title
-    _inputs:
+        label: Event Title
+        comment: "Required: The name of the event."
+        instance_values:
+          value: "New Event"
+      
+      date:
+        type: date
+        label: Event Date
+        comment: "Select the date for this event (can be in the future)."
+        options:
+          format: "YYYY-MM-DD"
+      
       registration:
         type: url
         placeholder: https://luma.com/ajug
+      
       image:
         type: image
         options:
           paths:
             uploads: /assets/img/meetups
-            uploads_filename:
-            uploads_use_relative_path:
-            static:
-            dam_uploads:
-            dam_uploads_filename:
-            dam_static:
-          mime_type:
-          accepts_mime_types:
-            - image/svg+xml
-            - image/png
-            - image/jpeg
-            - image/svg+xml
-            - image/png
-            - image/jpeg
-          empty_type:
-          resize_style:
           width: 1600
           height: 1200
-          expandable:
+          resize_style: cover
           allowed_sources:
             - uploads
             - existing
             - url
-          prevent_resize_existing_files:
-          sizes:
-        cascade: true
-    create:
-      path: >-
-        [relative_base_path]/{date|year}-{date|month}-{date|day}-{title|slugify}.[ext]
-    disable_add: false
-    disable_add_folder: false
-    disable_file_actions: false
-
 data_config: {}
 collection_groups:
   - heading: Pages
