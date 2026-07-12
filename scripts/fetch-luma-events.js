@@ -10,10 +10,18 @@ function parseArgs(argv) {
   const args = {
     write: false,
     after: new Date().toISOString(),
+    afterProvided: false,
     limit: 100,
+    includePast: false,
+    help: false,
   };
 
   for (const arg of argv) {
+    if (arg === "--help" || arg === "-h") {
+      args.help = true;
+      continue;
+    }
+
     if (arg === "--write") {
       args.write = true;
       continue;
@@ -26,6 +34,7 @@ function parseArgs(argv) {
 
     if (arg.startsWith("--after=")) {
       args.after = arg.slice("--after=".length);
+      args.afterProvided = true;
       continue;
     }
 
@@ -34,10 +43,27 @@ function parseArgs(argv) {
       if (Number.isFinite(parsed) && parsed > 0) {
         args.limit = parsed;
       }
+      continue;
+    }
+
+    if (arg === "--include-past") {
+      args.includePast = true;
     }
   }
 
   return args;
+}
+
+function printHelp() {
+  console.log("Usage: node scripts/fetch-luma-events.js [options]");
+  console.log("");
+  console.log("Options:");
+  console.log("  --write               Persist file changes to _posts");
+  console.log("  --dry-run             Show planned changes without writing files (default)");
+  console.log("  --after=<iso-date>    Fetch events starting after this UTC timestamp");
+  console.log("  --limit=<number>      Events per API page (default: 100)");
+  console.log("  --include-past        Include past events; defaults --after to 1970 if omitted");
+  console.log("  --help, -h            Show this help message");
 }
 
 function toIdToken(value) {
@@ -143,7 +169,7 @@ function normalizeEvent(rawEvent) {
   return { id, title, startAt, image, registration, rawEvent };
 }
 
-async function fetchAllApprovedFutureEvents({ apiKey, after, limit }) {
+async function fetchAllApprovedEvents({ apiKey, after, limit }) {
   const events = [];
   let cursor = null;
 
@@ -195,14 +221,24 @@ async function listPostFiles() {
 
 async function run() {
   const args = parseArgs(process.argv.slice(2));
+
+  if (args.help) {
+    printHelp();
+    return;
+  }
+
   const apiKey = process.env.LUMA_API_KEY || process.env.MEETUP_API_KEY;
 
   if (!apiKey) {
     throw new Error("Missing LUMA_API_KEY or MEETUP_API_KEY environment variable.");
   }
 
+  if (args.includePast && !args.afterProvided) {
+    args.after = "1970-01-01T00:00:00Z";
+  }
+
   const now = new Date();
-  const rawEvents = await fetchAllApprovedFutureEvents({
+  const rawEvents = await fetchAllApprovedEvents({
     apiKey,
     after: args.after,
     limit: args.limit,
@@ -228,7 +264,12 @@ async function run() {
     }
 
     const starts = new Date(event.startAt);
-    if (Number.isNaN(starts.getTime()) || starts <= now) {
+    if (Number.isNaN(starts.getTime())) {
+      summary.skipped += 1;
+      continue;
+    }
+
+    if (!args.includePast && starts <= now) {
       summary.skipped += 1;
       continue;
     }
