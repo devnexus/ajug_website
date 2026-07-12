@@ -8,3 +8,10 @@ For the jump start on our HTML5
 For site generation platform
 #### [Bootstrap](https://getbootstrap.com/)
 Where would any of us be without Bootstrap?
+
+Automation of LUMA event imports
+
+Run script locally on machine.
+```
+set -a; source .secrets; set +a; node scripts/fetch-luma-events.js --limit=10
+```

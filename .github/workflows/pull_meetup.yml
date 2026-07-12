@@ -1,0 +1,49 @@
+name: Pull Luma Events
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This job fetches data from Luma and creates a pull request if there are changes.
+  update-luma-data:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Fetch Luma Events
+      run: node scripts/fetch-luma-events.js --write
+      env:
+        LUMA_API_KEY: ${{ secrets.LUMA_API_KEY }}
+        MEETUP_API_KEY: ${{ secrets.MEETUP_API_KEY }}
+
+    - name: Show changed meetup posts
+      run: |
+        echo "Changed files under _posts:"
+        git status --short _posts || true
+        echo
+        echo "Diff summary for _posts:"
+        git --no-pager diff --name-status -- _posts || true
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v6
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: "docs: update luma events"
+        title: "Update Luma Events"
+        body: "Automated update of approved future events from the Luma API."
+        branch: "update-luma-events"
+        delete-branch: true
+        labels: "automated pr"
