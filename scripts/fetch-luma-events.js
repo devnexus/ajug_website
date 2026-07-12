@@ -62,7 +62,7 @@ function printHelp() {
   console.log("  --dry-run             Show planned changes without writing files (default)");
   console.log("  --after=<iso-date>    Fetch events starting after this UTC timestamp");
   console.log("  --limit=<number>      Events per API page (default: 100)");
-  console.log("  --include-past        Include past events; defaults --after to 1970 if omitted");
+  console.log("  --include-past        Legacy alias; past events are included when --after is provided");
   console.log("  --help, -h            Show this help message");
 }
 
@@ -233,10 +233,6 @@ async function run() {
     throw new Error("Missing LUMA_API_KEY or MEETUP_API_KEY environment variable.");
   }
 
-  if (args.includePast && !args.afterProvided) {
-    args.after = "1970-01-01T00:00:00Z";
-  }
-
   const now = new Date();
   const rawEvents = await fetchAllApprovedEvents({
     apiKey,
@@ -269,7 +265,7 @@ async function run() {
       continue;
     }
 
-    if (!args.includePast && starts <= now) {
+    if (!args.afterProvided && starts <= now) {
       summary.skipped += 1;
       continue;
     }

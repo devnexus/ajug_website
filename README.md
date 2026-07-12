@@ -21,7 +21,7 @@ Backfill missing historical events (dry-run first).
 set -a; source .secrets; set +a; node scripts/fetch-luma-events.js --after=2020-01-01T00:00:00Z --include-past --limit=100
 ```
 
-Tip: `--include-past` defaults to `--after=1970-01-01T00:00:00Z` when `--after` is omitted.
+Tip: script defaults to future events. To include past events, provide an explicit `--after` timestamp in the past.
 
 Persist fetched updates.
 ```
