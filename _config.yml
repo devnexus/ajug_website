@@ -54,3 +54,4 @@ gems:
 exclude:
   - Gemfile
   - Gemfile.lock
+  - scripts
