@@ -5,6 +5,10 @@ name: Pull Luma Events
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pull-requests: write
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This job fetches data from Luma and creates a pull request if there are changes.
